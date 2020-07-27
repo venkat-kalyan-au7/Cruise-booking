@@ -1,32 +1,20 @@
+
 import express from "express"
-
-const router = express.Router()
-
 import tourController from "../controller/tourcontrol"
 
-//importing helpers to check the routing parameters are present or not
-import helper from "../helpers/check"
+const router = express.Router();
 
-//it will check the url is id's are present or not
-router.param('id', helper.checkID);
+//to get the top5 best deals
+router.get('/top5',tourController.aliasTopTours,tourController.getAllTours)
 
-//to get all the tours details
+//get tour statistics with minimal fields
+router.get('/tourstats',tourController.getTourStats)
+
+//to see all the available tours
 router.get('/all',tourController.getAllTours)
-//to add new tour
-router.post('/newtour',helper.checkBody, tourController.createTour)
 
-router
-  .route('/:id')
+//to get the tour by id
+router.get('./:id',tourController.getTour)
   
-//get a single tour data by providing an id in url
-  .get(tourController.getTour)
-  
-//update a single tour data by providing an id in url
-  .patch(tourController.updateTour)
-  
-//delete a single tour data by providing an id in url
-  .delete(tourController.deleteTour);
 
 module.exports = router;
-
-
