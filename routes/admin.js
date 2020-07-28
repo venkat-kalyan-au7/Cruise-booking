@@ -4,7 +4,7 @@ import tourController from "../controller/tourcontrol"
 const router = express.Router();
 
 //admin can see all the tours
-router.get('/all',tourController.getAllTours)
+router.get('/existing',tourController.getAllTours)
 
 //admin can add new tour
 router.post('/newtour',tourController.createTour)
